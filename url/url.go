@@ -74,6 +74,7 @@ func generateId() string {
 		for i := range id {
 			id[i] = symbols[rand.Intn(len(symbols))]
 		}
+		return string(id)
 	}
 
 	for {
