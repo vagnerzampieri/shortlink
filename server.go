@@ -29,6 +29,10 @@ func init() {
 
 type Headers map[string]string
 
+func Redirector struct {
+	stats chan string
+}
+
 func Shorten(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		respondWith(w, http.StatusMethodNotAllowed, Headers{
