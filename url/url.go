@@ -44,3 +44,17 @@ func ConfigRepository(r Repository) {
 func RegisterClick(id string) {
 	repo.RegisterClick(id)
 }
+
+func FindOrCreateNewUrl(destination string) (u *Url, newUrl bool, err error) {
+	if u = repo.FindUrl(destination); u != nil {
+		return u, false, nil
+	}
+
+	if _, err = url.ParseRequestURI(destination); err != nil {
+		return nil, false, err
+	}
+
+	url := Url{generateId(), time.Now(), destination}
+	repo.Save(url)
+	return &url, true, nil
+}
