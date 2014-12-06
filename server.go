@@ -85,7 +85,7 @@ func Viewer(w http.ResponseWriter, r *http.Request) {
 }
 
 func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url)) {
-	path := strings.Split(r.Url.Path, "/")
+	path := strings.Split(r.URL.Path, "/")
 	id := path[len(path)-1]
 
 	if url := url.Search(id); url != nil {
@@ -137,7 +137,7 @@ func main() {
 	defer close(stats)
 	go recordStatistics(stats)
 
-	http.HandleFunc("/r/", &Redirector{stats})
+	http.Handle("/r/", &Redirector{stats})
 	http.HandleFunc("/api/shorten", Shorten)
 	http.HandleFunc("/api/stats", Viewer)
 
