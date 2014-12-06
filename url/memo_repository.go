@@ -34,3 +34,11 @@ func (r *memoRepository) Save(url Url) error {
 	r.urls[url.Id] = &url
 	return nil
 }
+
+func (r *memoRepository) RegisterClick(id string) {
+	r.clicks[id] += 1
+}
+
+func (r *memoRepository) FindClicks(id string) int {
+	return r.clicks[id]
+}
