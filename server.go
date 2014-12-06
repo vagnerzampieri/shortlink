@@ -59,7 +59,7 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	if newUrl {
 		status = http.StatusCreated
 	} else {
-		status = http.StatusOk
+		status = http.StatusOK
 	}
 
 	shortUrl := fmt.Sprintf("%s/r/%s", urlBase, url.Id)
@@ -107,7 +107,7 @@ func respondWith(
 }
 
 func respondWithJSON(w http.ResponseWriter, response string) {
-	respondWith(w, http.StatusOk, Headers{"Content-Type": "application/json"})
+	respondWith(w, http.StatusOK, Headers{"Content-Type": "application/json"})
 	fmt.Fprintf(w, response)
 }
 
