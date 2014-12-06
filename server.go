@@ -44,6 +44,9 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	}
 
 	shortUrl := fmt.Sprintf("%s/r/%s", urlBase, url.Id)
+	respondWith(w, status, Headers{
+		"Location": shortUrl,
+	})
 }
 
 func respondWith(
