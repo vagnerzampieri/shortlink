@@ -20,3 +20,12 @@ func (r *memoRepository) IdExist(id string) bool {
 func (r *memoRepository) FindId(id string) *Url {
 	return r.urls[id]
 }
+
+func (r *memoRepository) FindUrl(url string) *Url {
+	for _, u := range r.urls {
+		if u.Destination == url {
+			return u
+		}
+	}
+	return nil
+}
