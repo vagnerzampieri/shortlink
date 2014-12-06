@@ -142,5 +142,5 @@ func main() {
 	http.HandleFunc("/api/stats", Viewer)
 
 	logging("Initializer server in port %d...", *port)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), nil))
 }
