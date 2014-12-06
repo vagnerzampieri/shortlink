@@ -16,5 +16,5 @@ var (
 
 func init() {
 	port = 4000
-	urlBase = fmt.Sprintf(":%d", port)
+	urlBase = fmt.Sprintf("http://localhost:%d", port)
 }
