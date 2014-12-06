@@ -20,3 +20,8 @@ type Url struct {
 	Criation    time.Time `json:"criation"`
 	Destination string    `json:"destination"`
 }
+
+type Stats struct {
+	Url    *Url `json:"url"`
+	Clicks int  `json:"clicks"`
+}
