@@ -71,6 +71,19 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	logging("URL %s successfully shortened to %s.", url.Destination, shortUrl)
 }
 
+func Viewer(w http.ResponseWriter, r *http.Request) {
+	getUrlAndRun(w, r, func(url *url.Url) {
+		json, err := json.Marshal(url.Stats())
+
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			return
+		}
+
+		respondWithJSON(w, string(json))
+	})
+}
+
 func respondWith(
 	w http.ResponseWriter,
 	status int,
