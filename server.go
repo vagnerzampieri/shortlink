@@ -41,6 +41,12 @@ func respondWith(
 	w.WriteHeader(status)
 }
 
+fund extractUrl(r *http.Request) string {
+	url := make([]byte, r.ContentLength)
+	r.Body.Read(url)
+	return string(url)
+}
+
 func main() {
 	http.HandleFunc("/api/shorten", Shorten)
 	http.HandleFunc("/r/", Redirector)
