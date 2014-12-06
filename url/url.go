@@ -40,3 +40,7 @@ func init() {
 func ConfigRepository(r Repository) {
 	repo = r
 }
+
+func RegisterClick(id string) {
+	repo.RegisterClick(id)
+}
