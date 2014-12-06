@@ -19,7 +19,7 @@ var (
 
 func init() {
 	domain := flag.String("d", "localhost", "domain")
-	port = flag.Int("p", 4000, "port")
+	port = flag.Int("p", 8888, "port")
 	logOn = flag.Bool("l", true, "log on/off")
 
 	flag.Parse()
