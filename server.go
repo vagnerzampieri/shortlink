@@ -106,6 +106,11 @@ func respondWith(
 	w.WriteHeader(status)
 }
 
+func respondWithJSON(w http.ResponseWriter, response string) {
+	respondWith(w, http.StatusOk, Headers{"Content-Type": "application/json"})
+	fmt.Fprintf(w, response)
+}
+
 fund extractUrl(r *http.Request) string {
 	rawBody := make([]byte, r.ContentLength)
 	r.Body.Read(rawBody)
