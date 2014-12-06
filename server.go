@@ -19,6 +19,28 @@ func init() {
 	urlBase = fmt.Sprintf("http://localhost:%d", port)
 }
 
+type Headers map[string]string
+
+func Shorten(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		respondWith(w, http.StatusMethodNotAllowed, Headers{
+			"Allow": "POST",
+		})
+		return
+	}
+}
+
+func respondWith(
+	w http.ResponseWriter,
+	status int,
+	headers Headers,
+) {
+	for k, v := range headers {
+		w.Header().Set(k, v)
+	}
+	w.WriteHeader(status)
+}
+
 func main() {
 	http.HandleFunc("/api/shorten", Shorten)
 	http.HandleFunc("/r/", Redirector)
