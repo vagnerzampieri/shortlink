@@ -12,7 +12,11 @@ func NewMemoRepository() *memoRepository {
 	}
 }
 
-func (r memoRepository) IdExist(id string) bool {
+func (r *memoRepository) IdExist(id string) bool {
 	_, exist := r.urls[id]
 	return exist
+}
+
+func (r *memoRepository) FindId(id string) *Url {
+	return r.urls[id]
 }
