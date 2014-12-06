@@ -58,3 +58,12 @@ func FindOrCreateNewUrl(destination string) (u *Url, newUrl bool, err error) {
 	repo.Save(url)
 	return &url, true, nil
 }
+
+func Search(id string) *Url {
+	return repo.FindId(id)
+}
+
+func (u *Url) Stats() *Stats {
+	clicks := repo.FindClicks(u.Id)
+	return &Stats{u, clicks}
+}
