@@ -84,6 +84,17 @@ func Viewer(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url) {
+	path := strings.Split(r.Url.Path, "/")
+	id := path[len(path)-1]
+
+	if url := url.Search(id); url != nil {
+		executor(url)
+	} else {
+		http.NotFound(w, r)
+	}
+})
+
 func respondWith(
 	w http.ResponseWriter,
 	status int,
