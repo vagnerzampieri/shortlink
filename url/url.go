@@ -67,3 +67,18 @@ func (u *Url) Stats() *Stats {
 	clicks := repo.FindClicks(u.Id)
 	return &Stats{u, clicks}
 }
+
+func generateId() string {
+	newId := func() string {
+		id := make([]byte, length)
+		for i := range id {
+			id[i] = symbols[rand.Intn(len(symbols))]
+		}
+	}
+
+	for {
+		if id := newId(); !repo.IdExist(id) {
+			return id
+		}
+	}
+}
