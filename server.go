@@ -28,6 +28,22 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+
+	url, newUrl, err := url.FindOrCreateNewUrl(extractUrl(r))
+
+	if err != nil {
+		respondWith(w, http.StatusBadRequest, nil)
+		return
+	}
+
+	var status int
+	if newUrl {
+		status = http.StatusCreated
+	} else {
+		status = http.StatusOk
+	}
+
+	shortUrl := fmt.Sprintf("%s/r/%s", urlBase, url.Id)
 }
 
 func respondWith(
