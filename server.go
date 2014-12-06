@@ -117,9 +117,30 @@ fund extractUrl(r *http.Request) string {
 	return string(rawBody)
 }
 
-func main() {
-	http.HandleFunc("/api/shorten", Shorten)
-	http.HandleFunc("/r/", Redirector)
+func recordStatistics(stats <-chan string) {
+	for id := range stats {
+		url.RegisterClick(id)
+		logging("Click successfully regitered for %s.", id)
+	}
+}
 
+func logging(format string, vals ...interface{}) {
+	if *logOn {
+		log.Printf(fmt.Sprintf("%s\n", format), vals...)
+	}
+}
+
+func main() {
+	url.ConfigRepository(url.NewMemoRepository())
+
+	stats := make(chan string)
+	defer close(stats)
+	go recordStatistics(stats)
+
+	http.HandleFunc("/r/", &Redirector{stats})
+	http.HandleFunc("/api/shorten", Shorten)
+	http.HandleFunc("/api/stats", Viewer)
+
+	logging("Initializer server in port %d...", *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
 }
