@@ -65,7 +65,10 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	shortUrl := fmt.Sprintf("%s/r/%s", urlBase, url.Id)
 	respondWith(w, status, Headers{
 		"Location": shortUrl,
+		"Link": 	fmt.Sprintf("<%s/api/stats/%s>; rel=\"stats\"", urlBase, url.Id)
 	})
+
+	logging("URL %s successfully shortened to %s.", url.Destination, shortUrl)
 }
 
 func respondWith(
