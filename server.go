@@ -18,8 +18,13 @@ var (
 )
 
 func init() {
-	port = 4000
-	urlBase = fmt.Sprintf("http://localhost:%d", port)
+	domain := flag.String("d", "localhost", "domain")
+	port 	= flag.Int("p", 4000, "port")
+	logOn 	= flag.Bool("l", true, "log on/off")
+
+	flag.Parse()
+
+	urlBase = fmt.Sprintf("http://%s:%d", *domain, *port)
 }
 
 type Headers map[string]string
