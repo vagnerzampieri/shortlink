@@ -36,3 +36,7 @@ var repo Repository
 func init() {
 	rand.Seed(time.Now().UnixNano())
 }
+
+func ConfigRepository(r Repository) {
+	repo = r
+}
