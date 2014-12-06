@@ -11,3 +11,8 @@ func NewMemoRepository() *memoRepository {
 		make(map[string]int),
 	}
 }
+
+func (r memoRepository) IdExist(id string) bool {
+	_, exist := r.urls[id]
+	return exist
+}
