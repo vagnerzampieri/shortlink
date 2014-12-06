@@ -12,15 +12,15 @@ import (
 )
 
 var (
-	logOn 	*bool
+	logOn   *bool
 	port    *int
 	urlBase string
 )
 
 func init() {
 	domain := flag.String("d", "localhost", "domain")
-	port 	= flag.Int("p", 4000, "port")
-	logOn 	= flag.Bool("l", true, "log on/off")
+	port = flag.Int("p", 4000, "port")
+	logOn = flag.Bool("l", true, "log on/off")
 
 	flag.Parse()
 
@@ -29,7 +29,7 @@ func init() {
 
 type Headers map[string]string
 
-func Redirector struct {
+type Redirector struct {
 	stats chan string
 }
 
@@ -65,7 +65,7 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	shortUrl := fmt.Sprintf("%s/r/%s", urlBase, url.Id)
 	respondWith(w, status, Headers{
 		"Location": shortUrl,
-		"Link": 	fmt.Sprintf("<%s/api/stats/%s>; rel=\"stats\"", urlBase, url.Id)
+		"Link":     fmt.Sprintf("<%s/api/stats/%s>; rel=\"stats\"", urlBase, url.Id),
 	})
 
 	logging("URL %s successfully shortened to %s.", url.Destination, shortUrl)
@@ -84,7 +84,7 @@ func Viewer(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url) {
+func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url)) {
 	path := strings.Split(r.Url.Path, "/")
 	id := path[len(path)-1]
 
@@ -93,7 +93,7 @@ func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url
 	} else {
 		http.NotFound(w, r)
 	}
-})
+}
 
 func respondWith(
 	w http.ResponseWriter,
@@ -111,7 +111,7 @@ func respondWithJSON(w http.ResponseWriter, response string) {
 	fmt.Fprintf(w, response)
 }
 
-fund extractUrl(r *http.Request) string {
+func extractUrl(r *http.Request) string {
 	rawBody := make([]byte, r.ContentLength)
 	r.Body.Read(rawBody)
 	return string(rawBody)
