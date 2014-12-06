@@ -29,3 +29,8 @@ func (r *memoRepository) FindUrl(url string) *Url {
 	}
 	return nil
 }
+
+func (r *memoRepository) Save(url Url) error {
+	r.urls[url.Id] = &url
+	return nil
+}
