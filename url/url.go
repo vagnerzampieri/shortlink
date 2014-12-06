@@ -25,3 +25,9 @@ type Stats struct {
 	Url    *Url `json:"url"`
 	Clicks int  `json:"clicks"`
 }
+
+//var repo Repository
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
