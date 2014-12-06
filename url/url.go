@@ -11,9 +11,14 @@ const (
 	symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-+"
 )
 
-//type Repository interface {
-
-//}
+type Repository interface {
+	IdExist(id string) bool
+	FindId(id string) *Url
+	FindUrl(url string) *Url
+	Save(url Url) error
+	RegisterClick(id string)
+	FindClicks(id string) int
+}
 
 type Url struct {
 	Id          string    `json:"id"`
@@ -26,7 +31,7 @@ type Stats struct {
 	Clicks int  `json:"clicks"`
 }
 
-//var repo Repository
+var repo Repository
 
 func init() {
 	rand.Seed(time.Now().UnixNano())
