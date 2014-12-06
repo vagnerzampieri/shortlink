@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,7 +12,8 @@ import (
 )
 
 var (
-	port    int
+	logOn 	*bool
+	port    *int
 	urlBase string
 )
 
@@ -61,9 +64,9 @@ func respondWith(
 }
 
 fund extractUrl(r *http.Request) string {
-	url := make([]byte, r.ContentLength)
-	r.Body.Read(url)
-	return string(url)
+	rawBody := make([]byte, r.ContentLength)
+	r.Body.Read(rawBody)
+	return string(rawBody)
 }
 
 func main() {
