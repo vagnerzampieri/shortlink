@@ -8,3 +8,8 @@ import (
 
 	"github.com/vagnerzampieri/shortlink/url"
 )
+
+var (
+	port    int
+	urlBase string
+)
