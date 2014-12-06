@@ -1,0 +1,1 @@
+Sample shortlink in Go
