@@ -13,3 +13,8 @@ var (
 	port    int
 	urlBase string
 )
+
+func init() {
+	port = 4000
+	urlBase = fmt.Sprintf(":%d", port)
+}
