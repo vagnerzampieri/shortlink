@@ -33,6 +33,13 @@ func Redirector struct {
 	stats chan string
 }
 
+func (r *Redirector) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	getUrlAndRun(w, req, func(url *url.Url) {
+		http.Redirect(w, req, url.Destination, http.StatusMovedPermanently)
+		r.stats <- url.Id
+	})
+}
+
 func Shorten(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		respondWith(w, http.StatusMethodNotAllowed, Headers{
