@@ -139,7 +139,7 @@ func main() {
 
 	http.Handle("/r/", &Redirector{stats})
 	http.HandleFunc("/api/shorten", Shorten)
-	http.HandleFunc("/api/stats", Viewer)
+	http.HandleFunc("/api/stats/", Viewer)
 
 	logging("Initializer server in port %d...", *port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", *port), nil))
