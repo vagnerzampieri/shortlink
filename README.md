@@ -20,3 +20,18 @@
       -d="localhost": domain
       -l=true: log on/off
       -p=8888: port
+
+###With my [Dockerfile][Dockerfile]
+
+    $ sudo docker ps
+    CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+    ef4c64eb792b        go:latest           "/bin/bash"         19 hours ago        Up 19 hours                             naughty_kirch
+
+    $ sudo docker inspect go | grep IPAddress
+
+    $ sudo docker inspect naughty_kirch | grep IPAddress
+            "IPAddress": "172.17.0.4",
+
+Access browser `http://172.17.0.4:8888/`
+
+[Dockerfile]: https://github.com/vagnerzampieri/docker-files/tree/master/go
