@@ -81,7 +81,9 @@ func Viewer(w http.ResponseWriter, r *http.Request) {
 		}
 
 		respondWithJSON(w, string(json))
+		logging("Respond JSON %s", string(json))
 	})
+
 }
 
 func getUrlAndRun(w http.ResponseWriter, r *http.Request, executor func(*url.Url)) {
