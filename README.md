@@ -16,6 +16,10 @@
     curl http://localhost:8888/r/Xz+ss
     
     2014/12/07 14:26:24 Click successfully regitered for Xz+ss.
+    
+    curl http://localhost:8888/api/stats/Xz+ss
+    
+    {"url":{"id":"Xz+ss","criation":"2014-12-07T16:55:51.131866986Z","destination":"http://frelleto.com"},"clicks":0}
 ###Help:
 
     ./shortlink -h
