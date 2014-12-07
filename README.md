@@ -12,6 +12,10 @@
 
     2014/12/06 21:48:47 Initializer server in port 8888...
     2014/12/06 21:57:58 URL http://frelleto.com successfully shortened to http://localhost:8888/r/Xz+ss.
+    
+    curl http://localhost:8888/r/Xz+ss
+    
+    2014/12/07 14:26:24 Click successfully regitered for Xz+ss.
 ###Help:
 
     ./shortlink -h
